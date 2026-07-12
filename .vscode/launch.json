@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter: Passenger App",
+      "request": "launch",
+      "type": "dart",
+      "program": "${workspaceFolder}/apps/passenger/lib/main.dart",
+      "cwd": "${workspaceFolder}/apps/passenger"
+    },
+    {
+      "name": "Flutter: Driver App",
+      "request": "launch",
+      "type": "dart",
+      "program": "${workspaceFolder}/apps/driver/lib/main.dart",
+      "cwd": "${workspaceFolder}/apps/driver"
+    },
+    {
+      "name": "NestJS: Backend API",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start:debug"
+      ],
+      "cwd": "${workspaceFolder}/backend/api",
+      "restart": true,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Next.js: Admin Dashboard",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/admin",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run Full Stack",
+      "configurations": [
+        "NestJS: Backend API",
+        "Next.js: Admin Dashboard",
+        "Flutter: Passenger App"
+      ]
+    }
+  ]
+}
