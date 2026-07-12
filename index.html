@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ride Hailing — Plataforma de Transporte</title>
+  <meta name="description" content="Plataforma completa de transporte bajo demanda con apps para conductores, pasajeros y panel de administración." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- marked.js to render README.md at runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --surface2:    #21262d;
+      --border:      #30363d;
+      --text:        #e6edf3;
+      --muted:       #8b949e;
+      --accent:      #58a6ff;
+      --purple:      #a371f7;
+      --green:       #3fb950;
+      --yellow:      #d29922;
+      --red:         #f85149;
+      --radius:      12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, #0d1117 0%, #130d2a 55%, #0d1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(88,166,255,.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(88,166,255,.08);
+      border: 1px solid rgba(88,166,255,.25);
+      border-radius: 99px;
+      padding: 6px 18px;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 28px;
+      font-weight: 500;
+      letter-spacing: .03em;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      background: linear-gradient(130deg, #e6edf3 30%, #58a6ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 18px;
+      line-height: 1.15;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+    .hero-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s ease;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+    .btn-primary:hover { background: #79c0ff; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--border); transform: translateY(-1px); }
+
+    /* ── CONTENT ──────────────────────────────────── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* markdown rendered output */
+    #readme h1 { display: none; } /* already shown in hero */
+
+    #readme h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 56px 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    #readme h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 32px 0 10px;
+    }
+    #readme h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 24px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    #readme p { margin-bottom: 12px; }
+
+    #readme blockquote {
+      border-left: 3px solid var(--purple);
+      padding: 12px 20px;
+      background: rgba(163,113,247,.06);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    #readme pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    #readme pre code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: var(--text);
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    #readme code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .83em;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: #ffa657;
+    }
+
+    #readme table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    #readme th {
+      background: var(--surface2);
+      padding: 11px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-bottom: 1px solid var(--border);
+    }
+    #readme td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: .95rem;
+    }
+    #readme tr:last-child td { border-bottom: none; }
+    #readme tr:hover td { background: rgba(88,166,255,.04); }
+
+    #readme ul, #readme ol {
+      padding-left: 24px;
+      margin: 8px 0 14px;
+    }
+    #readme li { margin-bottom: 5px; }
+
+    /* Task list checkboxes */
+    #readme input[type="checkbox"] {
+      margin-right: 7px;
+      accent-color: var(--accent);
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    #readme hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 44px 0;
+    }
+
+    #readme a { color: var(--accent); text-decoration: none; }
+    #readme a:hover { text-decoration: underline; }
+    #readme strong { color: var(--text); font-weight: 600; }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── SCROLLBAR ────────────────────────────────── */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+    /* ── LOADER ───────────────────────────────────── */
+    .loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px;
+      color: var(--muted);
+    }
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 16px 40px; }
+      .container { padding: 32px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-badge">🚗 Monorepo · NestJS · Flutter · Next.js</div>
+    <h1>Ride Hailing</h1>
+    <p>Plataforma completa de transporte bajo demanda con apps para conductores, pasajeros y panel de administración.</p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://github.com/KdashDev/ride_hailing">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Ver en GitHub
+      </a>
+      <a class="btn btn-secondary" href="#readme">
+        📋 Ver Roadmap
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="readme">
+      <div class="loader">
+        <div class="spinner"></div>
+        Cargando documentación…
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>MIT © 2026 — Ride Hailing Project · <a href="https://github.com/KdashDev/ride_hailing">KdashDev/ride_hailing</a></p>
+  </footer>
+
+  <script>
+    // Fetch and render README.md using marked.js
+    fetch('README.md')
+      .then(r => {
+        if (!r.ok) throw new Error('No se pudo cargar README.md');
+        return r.text();
+      })
+      .then(md => {
+        const html = marked.parse(md, { gfm: true, breaks: false });
+        document.getElementById('readme').innerHTML = html;
+
+        // Make task-list checkboxes non-interactive (visual only)
+        document.querySelectorAll('#readme input[type="checkbox"]').forEach(cb => {
+          cb.setAttribute('disabled', '');
+        });
+      })
+      .catch(err => {
+        document.getElementById('readme').innerHTML =
+          `<p style="color:var(--red)">Error al cargar la documentación: ${err.message}</p>`;
+      });
+  </script>
+</body>
+</html>
